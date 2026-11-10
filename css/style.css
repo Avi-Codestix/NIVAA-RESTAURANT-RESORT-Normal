@@ -4431,3 +4431,83 @@ select {
 .room-booking-btn:hover {
     transform: translateY(-3px);
 }
+
+
+/* about responsive fix */
+
+
+/* ABOUT PAGE MOBILE RESPONSIVE FIX */
+@media (max-width: 600px) {
+
+    /* Our Story feature cards */
+    .about-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+        min-height: auto;
+        padding: 20px 12px;
+    }
+
+    .feature-item {
+        min-width: 0;
+        padding: 18px 8px;
+        border-right: 1px solid rgba(210, 185, 120, 0.45);
+        border-bottom: 1px solid rgba(210, 185, 120, 0.45);
+    }
+
+    .feature-item:nth-child(2n) {
+        border-right: none;
+    }
+
+    .feature-item:nth-child(5),
+    .feature-item:nth-child(6) {
+        border-bottom: none;
+    }
+
+    .feature-item h3 {
+        font-size: 10px;
+    }
+
+    .feature-item p {
+        font-size: 11px;
+    }
+
+    /* Hero description */
+    .hero-content .siz {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    /* Why Choose Us */
+    .why-items {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .why-item {
+        min-width: 0;
+    }
+
+    .why-item:nth-child(4n+1) {
+        border-right: 1px solid #665536;
+    }
+
+    .why-item:last-of-type {
+        grid-column: 1 / -1;
+        border-right: none;
+    }
+
+    /* Chef section */
+    .chef-image {
+        height: 320px;
+    }
+
+    .chef-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .chef-stats .stat p {
+        font-size: 11px;
+    }
+}
