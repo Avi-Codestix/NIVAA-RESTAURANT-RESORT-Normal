@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIVAA – Event Booking</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════════════════════ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #F8F4EC;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           MAIN CARD
+           ═══════════════════════════════════════════════════════════ */
+        .main-card {
+            display: flex;
+            max-width: 1180px;
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(7, 22, 51, 0.10);
+            overflow: hidden;
+            min-height: 600px;
+            height: auto;
+            max-height: none;
+        }
+
+        /* ─── LEFT PANEL ─── */
+        .left-panel {
+            flex: 0 0 27%;
+            background: #071633;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2.8rem 2.2rem;
+            min-height: 100%;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 22, 51, 0.78);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .left-panel>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .left-brand {
+            margin-bottom: 1.4rem;
+        }
+
+        .left-brand .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 2.5px;
+            line-height: 1.1;
+        }
+
+        .left-brand .brand-sub {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            color: #D8BD86;
+            text-transform: uppercase;
+            margin-top: 0.2rem;
+        }
+
+        .left-brand .brand-divider {
+            width: 48px;
+            height: 2px;
+            background: #C6A15B;
+            margin-top: 0.8rem;
+            border-radius: 2px;
+        }
+
+        .left-headline {
+            margin: 0.8rem 0 1rem 0;
+        }
+
+        .left-headline .line1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #FFFFFF;
+            letter-spacing: 2.5px;
+            display: block;
+        }
+
+        .left-headline .line2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.4rem;
+            font-weight: 400;
+            color: #D8BD86;
+            display: block;
+            line-height: 1.1;
+            margin-top: -0.1rem;
+        }
+
+        .left-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.82);
+            max-width: 100%;
+            margin-top: 0.2rem;
+        }
+
+        .left-desc strong {
+            color: #D8BD86;
+            font-weight: 500;
+        }
+
+        .left-accent {
+            margin-top: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .left-accent .line {
+            flex: 1;
+            height: 1px;
+            background: rgba(198, 161, 91, 0.35);
+        }
+
+        .left-accent .diamond {
+            color: #C6A15B;
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        /* ─── RIGHT PANEL ─── */
+        .right-panel {
+            flex: 1;
+            padding: 2rem 2.4rem 2rem 2.4rem;
+            background: #FCFAF6;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            max-height: none;
+        }
+
+        .right-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+        .right-panel::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .right-panel::-webkit-scrollbar-thumb {
+            background: #D8BD86;
+            border-radius: 4px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FORM HEADER
+           ═══════════════════════════════════════════════════════════ */
+        .form-header {
+            text-align: center;
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+
+        .form-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #071633;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .form-header h2 .gold-icon {
+            color: #C6A15B;
+            font-size: 0.8rem;
+        }
+
+        .form-header .decorative-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            margin: 0.4rem auto 0;
+            max-width: 240px;
+        }
+
+        .form-header .decorative-divider .line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #C6A15B, transparent);
+            border-radius: 2px;
+        }
+
+        .form-header .decorative-divider .diamond {
+            color: #C6A15B;
+            font-size: 0.6rem;
+            opacity: 0.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SECTION TITLES
+           ═══════════════════════════════════════════════════════════ */
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #071633;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin: 0.8rem 0 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .section-title .badge {
+            background: #C6A15B;
+            color: #FFFFFF;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.8rem;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .section-title .badge-req {
+            background: #d4c5b0;
+            color: #4a3f33;
+        }
+
+        .section-divider {
+            height: 1.5px;
+            background: #E6DED0;
+            margin: 0.1rem 0 0.5rem 0;
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           EVENT TYPE CARDS
+           ═══════════════════════════════════════════════════════════ */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.6rem;
+            margin: 0.2rem 0 0.1rem 0;
+            flex-shrink: 0;
+        }
+
+        .event-option {
+            background: #FFFFFF;
+            border: 2px solid #E6DED0;
+            border-radius: 14px;
+            padding: 0.8rem 0.2rem 0.7rem 0.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            min-height: 80px;
+            justify-content: center;
+        }
+
+        .event-option .ev-icon {
+            font-size: 1.6rem;
+            color: #77736B;
+            transition: 0.25s;
+        }
+
+        .event-option .ev-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #172033;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .event-option:hover {
+            border-color: #C6A15B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(198, 161, 91, 0.12);
+        }
+
+        .event-option.active {
+            background: #071633;
+            border-color: #C6A15B;
+            box-shadow: 0 6px 20px rgba(7, 22, 51, 0.20);
+            transform: translateY(-2px);
+        }
+
+        .event-option.active .ev-icon {
+            color: #D8BD86;
+        }
+        .event-option.active .ev-label {
+            color: #FFFFFF;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FORM ROWS
+           ═══════════════════════════════════════════════════════════ */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.8rem 1.2rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .form-row.two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FORM GROUPS & INPUTS
+           ═══════════════════════════════════════════════════════════ */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #172033;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .form-group label .required {
+            color: #b22222;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .form-group label .field-icon {
+            color: #C6A15B;
+            font-size: 0.85rem;
+            width: 1.1rem;
+        }
+
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrap .input-icon {
+            position: absolute;
+            left: 14px;
+            color: #A0988A;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+
+        .input-wrap input,
+        .input-wrap select,
+        .input-wrap textarea {
+            width: 100%;
+            padding: 0.65rem 0.9rem 0.65rem 2.8rem;
+            border-radius: 10px;
+            border: 2px solid #E6DED0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #172033;
+            transition: 0.2s;
+            outline: none;
+            height: 50px;
+            min-height: 50px;
+        }
+
+        .input-wrap textarea {
+            height: auto;
+            min-height: 50px;
+            padding: 0.65rem 0.9rem;
+            resize: vertical;
+        }
+
+        .input-wrap input:focus,
+        .input-wrap select:focus,
+        .input-wrap textarea:focus {
+            border-color: #C6A15B;
+            box-shadow: 0 0 0 4px rgba(198, 161, 91, 0.10);
+            background: #FFFDF9;
+        }
+
+        .input-wrap input::placeholder,
+        .input-wrap textarea::placeholder {
+            color: #B3A99A;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .input-wrap.textarea-wrap .input-icon {
+            display: none;
+        }
+
+        .input-wrap.textarea-wrap textarea {
+            padding: 0.65rem 0.9rem;
+            min-height: 50px;
+            border-radius: 10px;
+        }
+
+        input[type="date"] {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           OPTION CARDS
+           ═══════════════════════════════════════════════════════════ */
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.1rem;
+        }
+
+        .option-card {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem 0.5rem 0.8rem;
+            border-radius: 24px;
+            border: 2px solid #E6DED0;
+            background: #FFFFFF;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #172033;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            min-height: 44px;
+        }
+
+        .option-card .opt-icon {
+            font-size: 1rem;
+            color: #77736B;
+            transition: 0.2s;
+        }
+
+        .option-card:hover {
+            border-color: #C6A15B;
+            transform: translateY(-1px);
+        }
+
+        .option-card.active {
+            background: #071633;
+            border-color: #C6A15B;
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(7, 22, 51, 0.16);
+        }
+
+        .option-card.active .opt-icon {
+            color: #D8BD86;
+        }
+
+        .option-group input[type="radio"] {
+            display: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           ERROR MESSAGES
+           ═══════════════════════════════════════════════════════════ */
+        .error-msg {
+            color: #b22222;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 0.1rem;
+            display: none;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .error-msg.show {
+            display: flex;
+        }
+
+        .form-group.error .input-wrap input,
+        .form-group.error .input-wrap select,
+        .form-group.error .input-wrap textarea,
+        .form-group.error .option-card {
+            border-color: #b22222;
+            background: #FFF6F5;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BUTTONS
+           ═══════════════════════════════════════════════════════════ */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.9rem;
+            padding-top: 0.9rem;
+            border-top: 2px solid #E6DED0;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            height: 52px;
+            min-height: 52px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #071633;
+            border: 2.5px solid #071633;
+        }
+
+        .btn-outline:hover {
+            background: #071633;
+            color: #FFFFFF;
+            box-shadow: 0 6px 20px rgba(7, 22, 51, 0.14);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #071633;
+            color: #FFFFFF;
+            box-shadow: 0 6px 24px rgba(7, 22, 51, 0.22);
+        }
+
+        .btn-primary:hover {
+            background: #0B1B3A;
+            box-shadow: 0 8px 32px rgba(7, 22, 51, 0.28);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary .btn-icon {
+            color: #D8BD86;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FEATURES
+           ═══════════════════════════════════════════════════════════ */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #E6DED0;
+            flex-shrink: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .feature-item .fi-icon {
+            font-size: 1.4rem;
+            color: #C6A15B;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+
+        .feature-item .fi-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-item .fi-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #071633;
+            letter-spacing: 0.4px;
+        }
+
+        .feature-item .fi-desc {
+            font-size: 0.75rem;
+            color: #77736B;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-top: 0.05rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           TOAST
+           ═══════════════════════════════════════════════════════════ */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #172033;
+            color: #FFFFFF;
+            padding: 0.9rem 2.6rem;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            z-index: 999;
+            max-width: 90vw;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background: #b22222;
+        }
+        .toast.success {
+            background: #1a6e44;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — TABLET (768px – 1100px)
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .main-card {
+                flex-direction: column;
+                border-radius: 24px;
+                height: auto;
+                max-height: none;
+                min-height: auto;
+            }
+
+            .left-panel {
+                flex: 1 1 auto;
+                min-height: 160px;
+                padding: 1.8rem 2rem;
+                border-radius: 24px 24px 0 0;
+            }
+            .left-panel::before {
+                border-radius: 24px 24px 0 0;
+            }
+
+            .right-panel {
+                padding: 1.6rem 2rem 1.8rem 2rem;
+                height: auto;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .left-brand .brand-name {
+                font-size: 2rem;
+            }
+            .left-brand .brand-sub {
+                font-size: 0.7rem;
+                letter-spacing: 4px;
+            }
+            .left-headline .line1 {
+                font-size: 1.6rem;
+            }
+            .left-headline .line2 {
+                font-size: 2.8rem;
+            }
+            .left-desc {
+                font-size: 0.85rem;
+            }
+
+            .event-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+            .event-option {
+                min-height: 76px;
+                padding: 0.6rem 0.2rem 0.5rem 0.2rem;
+            }
+            .event-option .ev-icon {
+                font-size: 1.4rem;
+            }
+            .event-option .ev-label {
+                font-size: 0.7rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem 1rem;
+            }
+            .form-row.two-col {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.7rem;
+            }
+
+            .input-wrap input,
+            .input-wrap select,
+            .input-wrap textarea {
+                height: 50px;
+                min-height: 50px;
+                font-size: 0.95rem;
+                padding: 0.6rem 0.8rem 0.6rem 2.6rem;
+            }
+            .input-wrap.textarea-wrap textarea {
+                min-height: 50px;
+                padding: 0.6rem 0.8rem;
+            }
+            .input-wrap .input-icon {
+                font-size: 1rem;
+                left: 13px;
+            }
+
+            .form-group label {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 0.9rem;
+            }
+
+            .option-card {
+                font-size: 0.8rem;
+                min-height: 42px;
+                padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+            }
+            .option-card .opt-icon {
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                height: 50px;
+                min-height: 50px;
+                font-size: 0.85rem;
+                padding: 0.6rem 1.5rem;
+            }
+
+            .feature-item .fi-icon {
+                font-size: 1.3rem;
+            }
+            .feature-item .fi-title {
+                font-size: 0.8rem;
+            }
+            .feature-item .fi-desc {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — MOBILE (up to 768px)
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .main-card {
+                border-radius: 18px;
+                max-height: none;
+                height: auto;
+                min-height: auto;
+            }
+
+            .left-panel {
+                min-height: 130px;
+                padding: 1.2rem 1.5rem;
+                border-radius: 18px 18px 0 0;
+            }
+            .left-panel::before {
+                border-radius: 18px 18px 0 0;
+            }
+
+            .right-panel {
+                padding: 1.2rem 1.2rem 1.4rem 1.2rem;
+                max-height: none;
+                overflow-y: visible;
+                height: auto;
+            }
+
+            .left-brand .brand-name {
+                font-size: 1.7rem;
+            }
+            .left-brand .brand-sub {
+                font-size: 0.6rem;
+                letter-spacing: 3px;
+            }
+            .left-brand .brand-divider {
+                width: 36px;
+                height: 2px;
+                margin-top: 0.5rem;
+            }
+            .left-headline .line1 {
+                font-size: 1.3rem;
+            }
+            .left-headline .line2 {
+                font-size: 2.2rem;
+            }
+            .left-desc {
+                font-size: 0.8rem;
+                line-height: 1.6;
+            }
+            .left-accent {
+                margin-top: 1rem;
+            }
+
+            .form-header {
+                margin-bottom: 0.6rem;
+            }
+            .form-header h2 {
+                font-size: 1.4rem;
+                gap: 0.5rem;
+            }
+            .form-header .decorative-divider {
+                max-width: 180px;
+            }
+
+            .section-title {
+                font-size: 0.8rem;
+                margin: 0.6rem 0 0.3rem 0;
+            }
+            .section-title .badge {
+                font-size: 0.5rem;
+                padding: 0.1rem 0.6rem;
+            }
+            .section-divider {
+                margin: 0.05rem 0 0.3rem 0;
+            }
+
+            .event-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.4rem;
+            }
+            .event-option {
+                min-height: 72px;
+                padding: 0.5rem 0.15rem 0.4rem 0.15rem;
+                border-radius: 12px;
+                border-width: 2px;
+            }
+            .event-option .ev-icon {
+                font-size: 1.3rem;
+            }
+            .event-option .ev-label {
+                font-size: 0.65rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .form-row.two-col {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .form-group {
+                gap: 0.15rem;
+            }
+            .form-group label {
+                font-size: 0.75rem;
+            }
+            .form-group label .field-icon {
+                font-size: 0.8rem;
+                width: 1rem;
+            }
+            .form-group label .required {
+                font-size: 0.9rem;
+            }
+
+            .input-wrap input,
+            .input-wrap select,
+            .input-wrap textarea {
+                height: 50px;
+                min-height: 50px;
+                font-size: 1rem;
+                padding: 0.5rem 0.7rem 0.5rem 2.4rem;
+                border-radius: 10px;
+                border-width: 2px;
+            }
+            .input-wrap .input-icon {
+                font-size: 0.95rem;
+                left: 12px;
+            }
+            .input-wrap.textarea-wrap textarea {
+                min-height: 80px;
+                padding: 0.5rem 0.7rem;
+                font-size: 1rem;
+            }
+            .input-wrap input::placeholder,
+            .input-wrap textarea::placeholder {
+                font-size: 0.9rem;
+            }
+
+            .option-group {
+                gap: 0.4rem;
+            }
+            .option-card {
+                font-size: 0.8rem;
+                min-height: 44px;
+                padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+                border-radius: 22px;
+                border-width: 2px;
+                gap: 0.4rem;
+            }
+            .option-card .opt-icon {
+                font-size: 0.9rem;
+            }
+
+            .error-msg {
+                font-size: 0.65rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 0.7rem;
+                padding-top: 0.7rem;
+                border-top-width: 2px;
+            }
+            .btn {
+                width: 100%;
+                flex: none;
+                height: 52px;
+                min-height: 52px;
+                font-size: 0.85rem;
+                padding: 0.5rem 1.2rem;
+                border-radius: 30px;
+                justify-content: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem 0.9rem;
+                margin-top: 0.7rem;
+                padding-top: 0.7rem;
+                border-top-width: 2px;
+            }
+            .feature-item .fi-icon {
+                font-size: 1.2rem;
+            }
+            .feature-item .fi-title {
+                font-size: 0.75rem;
+            }
+            .feature-item .fi-desc {
+                font-size: 0.65rem;
+            }
+
+            .toast {
+                font-size: 0.85rem;
+                padding: 0.7rem 1.6rem;
+                bottom: 1rem;
+                max-width: 92vw;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — SMALL MOBILE (400px – 768px)
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 600px) {
+            .right-panel {
+                padding: 1rem 0.9rem 1.2rem 0.9rem;
+            }
+
+            .left-panel {
+                padding: 1rem 1.2rem;
+                min-height: 110px;
+            }
+            .left-brand .brand-name {
+                font-size: 1.4rem;
+            }
+            .left-brand .brand-sub {
+                font-size: 0.55rem;
+                letter-spacing: 2.5px;
+            }
+            .left-headline .line1 {
+                font-size: 1.1rem;
+            }
+            .left-headline .line2 {
+                font-size: 1.8rem;
+            }
+            .left-desc {
+                font-size: 0.7rem;
+                line-height: 1.5;
+            }
+
+            .form-header h2 {
+                font-size: 1.2rem;
+            }
+            .form-header .decorative-divider {
+                max-width: 140px;
+            }
+
+            .event-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.35rem;
+            }
+            .event-option {
+                min-height: 68px;
+                padding: 0.4rem 0.1rem 0.35rem 0.1rem;
+                border-radius: 10px;
+            }
+            .event-option .ev-icon {
+                font-size: 1.2rem;
+            }
+            .event-option .ev-label {
+                font-size: 0.6rem;
+            }
+
+            .section-title {
+                font-size: 0.75rem;
+                margin: 0.5rem 0 0.2rem 0;
+            }
+
+            .form-group label {
+                font-size: 0.7rem;
+            }
+
+            .input-wrap input,
+            .input-wrap select,
+            .input-wrap textarea {
+                height: 48px;
+                min-height: 48px;
+                font-size: 1rem;
+                padding: 0.4rem 0.6rem 0.4rem 2rem;
+                border-radius: 8px;
+            }
+            .input-wrap .input-icon {
+                font-size: 0.85rem;
+                left: 10px;
+            }
+            .input-wrap.textarea-wrap textarea {
+                min-height: 70px;
+                padding: 0.4rem 0.6rem;
+                font-size: 1rem;
+            }
+
+            .option-card {
+                font-size: 0.75rem;
+                min-height: 40px;
+                padding: 0.3rem 0.7rem 0.3rem 0.6rem;
+                border-radius: 20px;
+                gap: 0.3rem;
+            }
+            .option-card .opt-icon {
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                height: 50px;
+                min-height: 50px;
+                font-size: 0.8rem;
+                padding: 0.4rem 1rem;
+            }
+
+            .features {
+                gap: 0.5rem 0.7rem;
+            }
+            .feature-item .fi-icon {
+                font-size: 1.1rem;
+            }
+            .feature-item .fi-title {
+                font-size: 0.7rem;
+            }
+            .feature-item .fi-desc {
+                font-size: 0.6rem;
+            }
+
+            .toast {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
+                bottom: 0.8rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — VERY SMALL MOBILE (below 400px)
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 400px) {
+            body {
+                padding: 0.25rem;
+            }
+
+            .main-card {
+                border-radius: 14px;
+            }
+
+            .left-panel {
+                padding: 0.8rem 1rem;
+                min-height: 90px;
+                border-radius: 14px 14px 0 0;
+            }
+            .left-panel::before {
+                border-radius: 14px 14px 0 0;
+            }
+
+            .right-panel {
+                padding: 0.8rem 0.7rem 1rem 0.7rem;
+            }
+
+            .left-brand .brand-name {
+                font-size: 1.2rem;
+                letter-spacing: 1.5px;
+            }
+            .left-brand .brand-sub {
+                font-size: 0.5rem;
+                letter-spacing: 2px;
+            }
+            .left-brand .brand-divider {
+                width: 28px;
+                height: 1.5px;
+                margin-top: 0.3rem;
+            }
+            .left-headline .line1 {
+                font-size: 0.95rem;
+                letter-spacing: 1.5px;
+            }
+            .left-headline .line2 {
+                font-size: 1.5rem;
+            }
+            .left-desc {
+                font-size: 0.6rem;
+                line-height: 1.4;
+            }
+            .left-accent {
+                margin-top: 0.6rem;
+                gap: 0.4rem;
+            }
+            .left-accent .diamond {
+                font-size: 0.5rem;
+            }
+
+            .form-header {
+                margin-bottom: 0.4rem;
+            }
+            .form-header h2 {
+                font-size: 1rem;
+                gap: 0.3rem;
+                letter-spacing: 0.5px;
+            }
+            .form-header h2 .gold-icon {
+                font-size: 0.6rem;
+            }
+            .form-header .decorative-divider {
+                max-width: 100px;
+                gap: 0.4rem;
+            }
+            .form-header .decorative-divider .diamond {
+                font-size: 0.4rem;
+            }
+
+            .section-title {
+                font-size: 0.65rem;
+                margin: 0.4rem 0 0.15rem 0;
+                letter-spacing: 0.5px;
+                gap: 0.4rem;
+            }
+            .section-title .badge {
+                font-size: 0.4rem;
+                padding: 0.05rem 0.5rem;
+                letter-spacing: 0.3px;
+            }
+            .section-divider {
+                margin: 0.05rem 0 0.2rem 0;
+                height: 1px;
+            }
+
+            .event-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.25rem;
+            }
+            .event-option {
+                min-height: 60px;
+                padding: 0.3rem 0.1rem 0.25rem 0.1rem;
+                border-radius: 8px;
+                border-width: 1.5px;
+                gap: 0.1rem;
+            }
+            .event-option .ev-icon {
+                font-size: 1rem;
+            }
+            .event-option .ev-label {
+                font-size: 0.5rem;
+                letter-spacing: 0.2px;
+            }
+
+            .form-row {
+                gap: 0.35rem;
+            }
+            .form-row.two-col {
+                gap: 0.35rem;
+            }
+
+            .form-group {
+                gap: 0.1rem;
+            }
+            .form-group label {
+                font-size: 0.6rem;
+                letter-spacing: 0.3px;
+            }
+            .form-group label .field-icon {
+                font-size: 0.65rem;
+                width: 0.8rem;
+            }
+            .form-group label .required {
+                font-size: 0.75rem;
+            }
+
+            .input-wrap input,
+            .input-wrap select,
+            .input-wrap textarea {
+                height: 46px;
+                min-height: 46px;
+                font-size: 1rem;
+                padding: 0.3rem 0.5rem 0.3rem 1.7rem;
+                border-radius: 7px;
+                border-width: 1.5px;
+            }
+            .input-wrap .input-icon {
+                font-size: 0.75rem;
+                left: 8px;
+            }
+            .input-wrap.textarea-wrap textarea {
+                min-height: 60px;
+                padding: 0.3rem 0.5rem;
+                font-size: 1rem;
+            }
+            .input-wrap input::placeholder,
+            .input-wrap textarea::placeholder {
+                font-size: 0.8rem;
+            }
+
+            .option-group {
+                gap: 0.3rem;
+            }
+            .option-card {
+                font-size: 0.7rem;
+                min-height: 36px;
+                padding: 0.25rem 0.6rem 0.25rem 0.5rem;
+                border-radius: 18px;
+                border-width: 1.5px;
+                gap: 0.25rem;
+            }
+            .option-card .opt-icon {
+                font-size: 0.7rem;
+            }
+
+            .error-msg {
+                font-size: 0.55rem;
+                gap: 0.2rem;
+            }
+            .error-msg i {
+                font-size: 0.6rem;
+            }
+
+            .btn-group {
+                gap: 0.35rem;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top-width: 1.5px;
+            }
+            .btn {
+                height: 48px;
+                min-height: 48px;
+                font-size: 0.7rem;
+                padding: 0.3rem 0.8rem;
+                border-radius: 28px;
+                letter-spacing: 0.4px;
+                gap: 0.4rem;
+                border-width: 2px;
+            }
+            .btn i {
+                font-size: 0.8rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.3rem 0.5rem;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top-width: 1.5px;
+            }
+            .feature-item {
+                gap: 0.4rem;
+            }
+            .feature-item .fi-icon {
+                font-size: 0.9rem;
+                margin-top: 0;
+            }
+            .feature-item .fi-title {
+                font-size: 0.6rem;
+                letter-spacing: 0.2px;
+            }
+            .feature-item .fi-desc {
+                font-size: 0.5rem;
+                line-height: 1.3;
+            }
+
+            .toast {
+                font-size: 0.7rem;
+                padding: 0.5rem 1rem;
+                bottom: 0.5rem;
+                border-radius: 30px;
+                max-width: 95vw;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE — LANDSCAPE PHONE (height-constrained)
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-height: 700px) and (max-width: 900px) {
+            .main-card {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+                border-radius: 16px;
+            }
+
+            .left-panel {
+                min-height: 80px;
+                padding: 0.8rem 1.2rem;
+                border-radius: 16px 16px 0 0;
+            }
+            .left-panel::before {
+                border-radius: 16px 16px 0 0;
+            }
+
+            .left-brand .brand-name {
+                font-size: 1.3rem;
+            }
+            .left-brand .brand-sub {
+                font-size: 0.5rem;
+                letter-spacing: 2px;
+            }
+            .left-brand .brand-divider {
+                width: 24px;
+                height: 1.5px;
+                margin-top: 0.3rem;
+            }
+            .left-headline .line1 {
+                font-size: 0.9rem;
+            }
+            .left-headline .line2 {
+                font-size: 1.5rem;
+            }
+            .left-desc {
+                font-size: 0.6rem;
+                line-height: 1.3;
+            }
+            .left-accent {
+                margin-top: 0.4rem;
+            }
+
+            .right-panel {
+                padding: 0.8rem 1rem 1rem 1rem;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            .form-header {
+                margin-bottom: 0.3rem;
+            }
+            .form-header h2 {
+                font-size: 1.1rem;
+                gap: 0.3rem;
+            }
+            .form-header .decorative-divider {
+                max-width: 120px;
+                margin: 0.2rem auto 0;
+            }
+
+            .section-title {
+                font-size: 0.65rem;
+                margin: 0.3rem 0 0.1rem 0;
+            }
+            .section-divider {
+                margin: 0.05rem 0 0.15rem 0;
+            }
+
+            .event-grid {
+                gap: 0.25rem;
+            }
+            .event-option {
+                min-height: 50px;
+                padding: 0.3rem 0.1rem 0.25rem 0.1rem;
+                border-radius: 8px;
+            }
+            .event-option .ev-icon {
+                font-size: 1rem;
+            }
+            .event-option .ev-label {
+                font-size: 0.5rem;
+            }
+
+            .form-row {
+                gap: 0.25rem;
+            }
+            .form-row.two-col {
+                gap: 0.25rem;
+            }
+
+            .input-wrap input,
+            .input-wrap select,
+            .input-wrap textarea {
+                height: 40px;
+                min-height: 40px;
+                font-size: 0.9rem;
+                padding: 0.3rem 0.5rem 0.3rem 1.8rem;
+                border-radius: 6px;
+                border-width: 1.5px;
+            }
+            .input-wrap .input-icon {
+                font-size: 0.7rem;
+                left: 8px;
+            }
+            .input-wrap.textarea-wrap textarea {
+                min-height: 45px;
+                padding: 0.3rem 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .form-group label {
+                font-size: 0.6rem;
+            }
+            .form-group label .field-icon {
+                font-size: 0.6rem;
+                width: 0.8rem;
+            }
+
+            .option-card {
+                font-size: 0.65rem;
+                min-height: 32px;
+                padding: 0.2rem 0.5rem 0.2rem 0.4rem;
+                border-radius: 16px;
+                border-width: 1.5px;
+                gap: 0.25rem;
+            }
+            .option-card .opt-icon {
+                font-size: 0.65rem;
+            }
+
+            .btn-group {
+                gap: 0.3rem;
+                margin-top: 0.4rem;
+                padding-top: 0.4rem;
+                border-top-width: 1.5px;
+                flex-direction: row;
+            }
+            .btn {
+                height: 40px;
+                min-height: 40px;
+                font-size: 0.65rem;
+                padding: 0.3rem 0.8rem;
+                border-radius: 24px;
+                flex: 1;
+            }
+
+            .features {
+                display: none;
+            }
+
+            .toast {
+                font-size: 0.7rem;
+                padding: 0.4rem 1rem;
+                bottom: 0.5rem;
+            }
+        }
+
+
+
+
+
+        
+/* gloccy dite hiver  ----------->>>>>>>>>glocy------------------->>>>>>>>>>>*/
+
+
+/* Normal golden dot */
+.cursor-dot {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #d4af37;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+}
+
+/* Golden glow circle */
+.cursor-glow {
+    position: fixed;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(212, 175, 55, 0.8);
+    background: rgba(212, 175, 55, 0.08);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.25s ease, width 0.25s ease, height 0.25s ease;
+}
+
+/* Button/link hover */
+.cursor-glow.active {
+    width: 55px;
+    height: 55px;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow:
+        0 0 15px rgba(212, 175, 55, 0.6),
+        0 0 35px rgba(212, 175, 55, 0.3);
+}
+
+body {
+    cursor: none;
+}
+
+
+/* ===== NIVAA LOGO CSS ===== */
+
+.left-brand .logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* Main NIVAA Text */
+.left-brand .nav-logo-name {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1;
+    color: #D8BD86;
+}
+
+/* Restaurant & Resorts Text */
+.left-brand .nav-logo-tagline {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #D8BD86;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+
+/* Hover Effect */
+.left-brand .logo:hover .nav-logo-name,
+.left-brand .logo:hover .nav-logo-tagline {
+    color: #FFFFFF;
+    transition: color 0.3s ease;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .left-brand .nav-logo-name {
+        font-size: 34px;
+    }
+
+    .left-brand .nav-logo-tagline {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .left-brand .nav-logo-name {
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+
+    .left-brand .nav-logo-tagline {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- ponter hovver effect -->
+    <div class="cursor-dot"></div>
+   <div class="cursor-glow"></div>
+
+    <!-- ════════════════════════════════════════════════════════════
+    TOAST NOTIFICATION
+    ════════════════════════════════════════════════════════════ -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ════════════════════════════════════════════════════════════
+    MAIN CARD
+    ════════════════════════════════════════════════════════════ -->
+    <div class="main-card" id="bookingFormContainer">
+
+        <!-- ─── LEFT PANEL ─── -->
+        <div class="left-panel">
+            <!--
+            ═══════════════════════════════════════════════════
+            ADD YOUR EVENT IMAGE HERE
+            ═══════════════════════════════════════════════════
+            Use: background-image: url('your-image.jpg');
+            ═══════════════════════════════════════════════════
+            -->
+            <div class="left-brand" onclick="goHome()">
+                  <!-- <a href="../index.html" class="logo">
+    <img src="../logoIcon.png" alt="NIVAA Logo" class="logo-sz">
+</a> -->
+<a href="../index.html" class="logo">
+    <span class="nav-logo-name">NIVAA</span>
+    <span class="nav-logo-tagline">
+        NIVAA RESTAURANT &amp; RESORTS
+    </span>
+</a>
+            </div>
+
+            <div class="left-headline">
+                <span class="line1">BOOK YOUR</span>
+                <span class="line2">Special Event</span>
+            </div>
+
+            <p class="left-desc">
+                Make your moments memorable with <strong>premium venues</strong>,
+                delicious food and <strong>exceptional service</strong>.
+            </p>
+
+            <div class="left-accent">
+                <span class="line"></span>
+                <span class="diamond"><i class="fas fa-gem"></i></span>
+                <span class="line"></span>
+            </div>
+        </div>
+
+        <!-- ─── RIGHT PANEL ─── -->
+        <div class="right-panel">
+
+            <!-- Form Header -->
+            <div class="form-header">
+                <h2>
+                    <span class="gold-icon"><i class="fas fa-asterisk"></i></span>
+                    EVENT BOOKING FORM
+                    <span class="gold-icon"><i class="fas fa-asterisk"></i></span>
+                </h2>
+                <div class="decorative-divider">
+                    <span class="line"></span>
+                    <span class="diamond"><i class="fas fa-gem"></i></span>
+                    <span class="line"></span>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            1. SELECT EVENT TYPE
+            ══════════════════════════════════════════════════ -->
+            <div class="section-title">
+                <span>1. Select Event Type</span>
+                <span class="badge">required</span>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="event-grid" id="eventTypeGroup">
+                <div class="event-option" data-value="Wedding">
+                    <span class="ev-icon"><i class="fas fa-ring"></i></span>
+                    <span class="ev-label">Wedding</span>
+                </div>
+                <div class="event-option" data-value="Birthday Party">
+                    <span class="ev-icon"><i class="fas fa-cake-candles"></i></span>
+                    <span class="ev-label">Birthday</span>
+                </div>
+                <div class="event-option" data-value="Reception">
+                    <span class="ev-icon"><i class="fas fa-champagne-glasses"></i></span>
+                    <span class="ev-label">Reception</span>
+                </div>
+                <div class="event-option" data-value="Engagement">
+                    <span class="ev-icon"><i class="fas fa-heart"></i></span>
+                    <span class="ev-label">Engagement</span>
+                </div>
+                <div class="event-option" data-value="Anniversary">
+                    <span class="ev-icon"><i class="fas fa-calendar-heart"></i></span>
+                    <span class="ev-label">Anniversary</span>
+                </div>
+                <div class="event-option" data-value="Corporate Event">
+                    <span class="ev-icon"><i class="fas fa-building"></i></span>
+                    <span class="ev-label">Seminars & Meetings</span>
+                </div>
+                <div class="event-option" data-value="Other Event">
+                    <span class="ev-icon"><i class="fas fa-ellipsis"></i></span>
+                    <span class="ev-label">Other</span>
+                </div>
+            </div>
+            <div id="eventTypeError" class="error-msg">
+                <i class="fas fa-exclamation-circle"></i> Please select an event type.
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            2. PERSONAL DETAILS
+            ══════════════════════════════════════════════════ -->
+            <div class="section-title">
+                <span>2. Personal Details</span>
+                <span class="badge badge-req">required</span>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="form-row">
+                <div class="form-group" id="nameGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-user"></i></span>
+                        Full Name <span class="required">*</span>
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                        <input type="text" id="fullName" placeholder="Enter your full name" />
+                    </div>
+                    <div id="nameError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please enter your full name.
+                    </div>
+                </div>
+
+                <div class="form-group" id="phoneGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-phone"></i></span>
+                        Phone Number <span class="required">*</span>
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-phone"></i></span>
+                        <input type="tel" id="phoneNumber" placeholder="Enter your phone number" />
+                    </div>
+                    <div id="phoneError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a valid phone number.
+                    </div>
+                </div>
+
+                <div class="form-group" id="emailGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-envelope"></i></span>
+                        Email Address <span class="required">*</span>
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="emailAddress" placeholder="Enter your email address" />
+                    </div>
+                    <div id="emailError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a valid email address.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            3. EVENT DETAILS
+            ══════════════════════════════════════════════════ -->
+            <div class="section-title">
+                <span>3. Event Details</span>
+                <span class="badge badge-req">required</span>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="form-row">
+                <div class="form-group" id="dateGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-calendar-day"></i></span>
+                        Event Date <span class="required">*</span>
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-calendar-day"></i></span>
+                        <input type="date" id="eventDate" />
+                    </div>
+                    <div id="dateError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please select an event date.
+                    </div>
+                </div>
+
+                <div class="form-group" id="guestsGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-users"></i></span>
+                        Expected Guests <span class="required">*</span>
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-users"></i></span>
+                        <input type="number" id="expectedGuests" placeholder="Enter guests" min="1" />
+                    </div>
+                    <div id="guestsError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please enter the number of guests.
+                    </div>
+                </div>
+
+                <div class="form-group" id="timeGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-clock"></i></span>
+                        Preferred Time <span class="required">*</span>
+                    </label>
+                    <div class="option-group" id="timeOptions">
+                        <label class="option-card" data-value="Morning">
+                            <span class="opt-icon"><i class="fas fa-sun"></i></span>
+                            Morning
+                            <input type="radio" name="preferredTime" value="Morning" />
+                        </label>
+                        <label class="option-card" data-value="Afternoon">
+                            <span class="opt-icon"><i class="fas fa-cloud-sun"></i></span>
+                            Afternoon
+                            <input type="radio" name="preferredTime" value="Afternoon" />
+                        </label>
+                        <label class="option-card" data-value="Evening">
+                            <span class="opt-icon"><i class="fas fa-moon"></i></span>
+                            Evening
+                            <input type="radio" name="preferredTime" value="Evening" />
+                        </label>
+                        <label class="option-card" data-value="Full Day">
+                            <span class="opt-icon"><i class="fas fa-clock"></i></span>
+                            Full Day
+                            <input type="radio" name="preferredTime" value="Full Day" />
+                        </label>
+                    </div>
+                    <div id="timeError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please select a time.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            4. VENUE / REQUIREMENTS
+            ══════════════════════════════════════════════════ -->
+            <div class="section-title">
+                <span>4. Venue / Requirements</span>
+                <span class="badge badge-req">required</span>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="form-row two-col">
+                <div class="form-group" id="venueGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-building"></i></span>
+                        Venue Preference <span class="required">*</span>
+                    </label>
+                    <div class="option-group" id="venueOptions">
+                        <label class="option-card" data-value="Banquet Hall">
+                            <span class="opt-icon"><i class="fas fa-building"></i></span>
+                            Banquet Hall
+                            <input type="radio" name="venuePreference" value="Banquet Hall" />
+                        </label>
+                        <label class="option-card" data-value="Lawn">
+                            <span class="opt-icon"><i class="fas fa-tree"></i></span>
+                            Lawn
+                            <input type="radio" name="venuePreference" value="Lawn" />
+                        </label>
+                        <label class="option-card" data-value="Restaurant">
+                            <span class="opt-icon"><i class="fas fa-utensils"></i></span>
+                            Restaurant
+                            <input type="radio" name="venuePreference" value="Restaurant" />
+                        </label>
+                        <label class="option-card" data-value="Resort">
+                            <span class="opt-icon"><i class="fas fa-hotel"></i></span>
+                            Resort
+                            <input type="radio" name="venuePreference" value="Resort" />
+                        </label>
+                    </div>
+                    <div id="venueError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please select a venue.
+                    </div>
+                </div>
+
+                <div class="form-group" id="foodGroup">
+                    <label>
+                        <span class="field-icon"><i class="fas fa-utensil-spoon"></i></span>
+                        Food Preference <span class="required">*</span>
+                    </label>
+                    <div class="option-group" id="foodOptions">
+                        <label class="option-card" data-value="Veg">
+                            <span class="opt-icon"><i class="fas fa-leaf"></i></span>
+                            Veg
+                            <input type="radio" name="foodPreference" value="Veg" />
+                        </label>
+                        <label class="option-card" data-value="Jain">
+                            <span class="opt-icon"><i class="fas fa-hand-peace"></i></span>
+                            Jain
+                            <input type="radio" name="foodPreference" value="Jain" />
+                        </label>
+                        <label class="option-card" data-value="Custom">
+                            <span class="opt-icon"><i class="fas fa-star"></i></span>
+                            Custom
+                            <input type="radio" name="foodPreference" value="Custom" />
+                        </label>
+                    </div>
+                    <div id="foodError" class="error-msg">
+                        <i class="fas fa-exclamation-circle"></i> Please select a food preference.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            ADDITIONAL REQUIREMENTS
+            ══════════════════════════════════════════════════ -->
+            <div class="section-title">
+                <span>Additional Requirements</span>
+            </div>
+            <div class="section-divider"></div>
+
+            <div class="form-group" style="flex-shrink: 0;">
+                <div class="input-wrap textarea-wrap">
+                    <textarea id="additionalRequirements" placeholder="Tell us about your special requirements, decorations, theme, etc."></textarea>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            BUTTONS
+            ══════════════════════════════════════════════════ -->
+            <div class="btn-group">
+                <button class="btn btn-primary" id="sendBookingBtn" type="button">
+                    <i class="fas fa-paper-plane btn-icon"></i> Send Booking Request
+                </button>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════
+            PREMIUM FEATURES
+            ══════════════════════════════════════════════════ -->
+            <div class="features">
+                <div class="feature-item">
+                    <span class="fi-icon"><i class="fas fa-crown"></i></span>
+                    <div class="fi-content">
+                        <span class="fi-title">Premium Venues</span>
+                        <span class="fi-desc">Elegant spaces for every occasion</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="fi-icon"><i class="fas fa-utensils"></i></span>
+                    <div class="fi-content">
+                        <span class="fi-title">Delicious Food</span>
+                        <span class="fi-desc">Multi-cuisine &amp; customized menus</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="fi-icon"><i class="fas fa-headset"></i></span>
+                    <div class="fi-content">
+                        <span class="fi-title">Exceptional Service</span>
+                        <span class="fi-desc">Dedicated team for your event</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="fi-icon"><i class="fas fa-check-circle"></i></span>
+                    <div class="fi-content">
+                        <span class="fi-title">Hassle Free Booking</span>
+                        <span class="fi-desc">Easy &amp; quick booking process</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /right-panel -->
+
+    </div>
+    <!-- /main-card -->
+
+
+    <!-- ════════════════════════════════════════════════════════════
+    JAVASCRIPT
+    ════════════════════════════════════════════════════════════ -->
+<script>
+    (function() {
+        'use strict';
+
+        // ─── FIXED: Correct WhatsApp number (no spaces, no +, no hyphens) ───
+        const WHATSAPP_NUMBER = '917037127008';
+
+        // DOM refs
+        const eventOptions = document.querySelectorAll('.event-option');
+        const eventTypeError = document.getElementById('eventTypeError');
+
+        const fullName = document.getElementById('fullName');
+        const phoneNumber = document.getElementById('phoneNumber');
+        const emailAddress = document.getElementById('emailAddress');
+        const eventDate = document.getElementById('eventDate');
+        const expectedGuests = document.getElementById('expectedGuests');
+        const additionalReq = document.getElementById('additionalRequirements');
+
+        const timeRadios = document.querySelectorAll('input[name="preferredTime"]');
+        const venueRadios = document.querySelectorAll('input[name="venuePreference"]');
+        const foodRadios = document.querySelectorAll('input[name="foodPreference"]');
+
+        const timeOptionCards = document.querySelectorAll('#timeOptions .option-card');
+        const venueOptionCards = document.querySelectorAll('#venueOptions .option-card');
+        const foodOptionCards = document.querySelectorAll('#foodOptions .option-card');
+
+        const sendBtn = document.getElementById('sendBookingBtn');
+        const checkAvailBtn = document.getElementById('checkAvailabilityBtn');
+        const toast = document.getElementById('toast');
+
+        const nameError = document.getElementById('nameError');
+        const phoneError = document.getElementById('phoneError');
+        const emailError = document.getElementById('emailError');
+        const dateError = document.getElementById('dateError');
+        const guestsError = document.getElementById('guestsError');
+        const timeError = document.getElementById('timeError');
+        const venueError = document.getElementById('venueError');
+        const foodError = document.getElementById('foodError');
+
+        const nameGroup = document.getElementById('nameGroup');
+        const phoneGroup = document.getElementById('phoneGroup');
+        const emailGroup = document.getElementById('emailGroup');
+        const dateGroup = document.getElementById('dateGroup');
+        const guestsGroup = document.getElementById('guestsGroup');
+        const timeGroup = document.getElementById('timeGroup');
+        const venueGroup = document.getElementById('venueGroup');
+        const foodGroup = document.getElementById('foodGroup');
+
+        let selectedEvent = '';
+
+        const today = new Date().toISOString().split('T')[0];
+        eventDate.setAttribute('min', today);
+
+        // Event type selection
+        eventOptions.forEach(el => {
+            el.addEventListener('click', function() {
+                eventOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                selectedEvent = this.dataset.value;
+                eventTypeError.classList.remove('show');
+            });
+        });
+
+        // Option cards
+        function setupOptionCards(cards) {
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'INPUT') return;
+                    const radio = this.querySelector('input[type="radio"]');
+                    if (radio) {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                    cards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    const parentGroup = this.closest('.form-group');
+                    if (parentGroup) {
+                        const err = parentGroup.querySelector('.error-msg');
+                        if (err) err.classList.remove('show');
+                        parentGroup.classList.remove('error');
+                    }
+                });
+            });
+        }
+
+        setupOptionCards(timeOptionCards);
+        setupOptionCards(venueOptionCards);
+        setupOptionCards(foodOptionCards);
+
+        function syncOptionCards(cards) {
+            cards.forEach(card => {
+                const radio = card.querySelector('input[type="radio"]');
+                if (radio && radio.checked) {
+                    cards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.option-group input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const parentGroup = this.closest('.option-group');
+                if (parentGroup) {
+                    const cards = parentGroup.querySelectorAll('.option-card');
+                    syncOptionCards(cards);
+                }
+            });
+        });
+
+        // Helpers
+        function clearAllErrors() {
+            [nameError, phoneError, emailError, dateError, guestsError,
+                timeError, venueError, foodError, eventTypeError
+            ].forEach(el => { if (el) el.classList.remove('show'); });
+            [nameGroup, phoneGroup, emailGroup, dateGroup, guestsGroup,
+                timeGroup, venueGroup, foodGroup
+            ].forEach(el => { if (el) el.classList.remove('error'); });
+        }
+
+        function showError(errorEl, groupEl) {
+            if (errorEl) errorEl.classList.add('show');
+            if (groupEl) groupEl.classList.add('error');
+        }
+
+        function showToast(message, type) {
+            toast.textContent = message;
+            toast.className = 'toast ' + (type || '');
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 4500);
+        }
+
+        // Validation
+        function validateForm() {
+            let isValid = true;
+            clearAllErrors();
+
+            if (!selectedEvent) { showError(eventTypeError);
+                isValid = false; }
+
+            const nameVal = fullName.value.trim();
+            if (!nameVal || nameVal.length < 2) { showError(nameError, nameGroup);
+                isValid = false; }
+
+            const phoneVal = phoneNumber.value.trim();
+            const phoneClean = phoneVal.replace(/[\s\-()+]/g, '');
+            if (!phoneClean || phoneClean.length < 10 || !/^\d+$/.test(phoneClean)) { showError(phoneError,
+                    phoneGroup);
+                isValid = false; }
+
+            const emailVal = emailAddress.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailVal || !emailRegex.test(emailVal)) { showError(emailError, emailGroup);
+                isValid = false; }
+
+            const dateVal = eventDate.value;
+            if (!dateVal) { showError(dateError, dateGroup);
+                isValid = false; } else {
+                const selectedDate = new Date(dateVal);
+                const todayDate = new Date();
+                todayDate.setHours(0, 0, 0, 0);
+                if (selectedDate < todayDate) { showError(dateError, dateGroup);
+                    isValid = false; }
+            }
+
+            const guestsVal = parseInt(expectedGuests.value.trim(), 10);
+            if (!guestsVal || guestsVal < 1) { showError(guestsError, guestsGroup);
+                isValid = false; }
+
+            const timeSelected = Array.from(timeRadios).some(r => r.checked);
+            if (!timeSelected) { showError(timeError, timeGroup);
+                isValid = false; }
+
+            const venueSelected = Array.from(venueRadios).some(r => r.checked);
+            if (!venueSelected) { showError(venueError, venueGroup);
+                isValid = false; }
+
+            const foodSelected = Array.from(foodRadios).some(r => r.checked);
+            if (!foodSelected) { showError(foodError, foodGroup);
+                isValid = false; }
+
+            return isValid;
+        }
+
+        function getFormData() {
+            const getCheckedValue = (radios) => {
+                for (const r of radios) { if (r.checked) return r.value; }
+                return '';
+            };
+            return {
+                eventType: selectedEvent || 'Not selected',
+                fullName: fullName.value.trim() || 'Not provided',
+                phone: phoneNumber.value.trim() || 'Not provided',
+                email: emailAddress.value.trim() || 'Not provided',
+                eventDate: eventDate.value || 'Not selected',
+                expectedGuests: expectedGuests.value.trim() || 'Not provided',
+                preferredTime: getCheckedValue(timeRadios) || 'Not selected',
+                venuePreference: getCheckedValue(venueRadios) || 'Not selected',
+                foodPreference: getCheckedValue(foodRadios) || 'Not selected',
+                additionalReq: additionalReq.value.trim() || 'None'
+            };
+        }
+
+       function buildWhatsAppMessage(data) {
+    return [
+        '━━━━━━━━━━━━━━━━━━━━',
+        '       🏨 NIVAA',
+        '   *GUEST EVENT REQUEST*',
+        '━━━━━━━━━━━━━━━━━━━━',
+        '',
+        '*PERSONAL DETAILS*',
+        ' Name: ' +  data.fullName,
+        '📞 Contact: ' + data.phone,
+        '✉️ Email: ' + data.email,
+        '',
+        '*EVENT DETAILS*',
+        '🎉 Event: ' + data.eventType,
+        '📅 Date: ' + data.eventDate,
+        '🕐 Time: ' + data.preferredTime,
+        '👥 Guests: ' + data.expectedGuests,
+        '',
+        '*VENUE & PREFERENCES*',
+        '🏛️ Venue: ' + data.venuePreference,
+        '🍽️ Food: ' + data.foodPreference,
+        '',
+        '*SPECIAL REQUEST*',
+        '📝 ' + data.additionalReq,
+        '',
+        '━━━━━━━━━━━━━━━━━━━━',
+        'STATUS: 🟡 NEW REQUEST',
+        'SOURCE: Nivaa Website',
+        '━━━━━━━━━━━━━━━━━━━━',
+        '',
+        '*NIVAA RESTAURANT & RESORTS*'
+    ].join('\n');
+}
+
+        // ─── FIXED: WhatsApp URL uses clean number, opens in new tab/window ───
+        function openWhatsApp(message) {
+            const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
+            window.open(url, '_blank');
+        }
+
+        let isProcessing = false;
+
+        // ─── FIXED: Submission flow — validation → WhatsApp → redirect ───
+        function handleSubmit() {
+            if (isProcessing) return;
+            isProcessing = true;
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            const valid = validateForm();
+            if (!valid) {
+                showToast('Please fix the highlighted fields.', 'error');
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fas fa-paper-plane btn-icon"></i> Send Booking Request';
+                isProcessing = false;
+                return;
+            }
+
+            const data = getFormData();
+            const message = buildWhatsAppMessage(data);
+
+            // Open WhatsApp in a new tab/window
+            openWhatsApp(message);
+
+            // Show success toast
+            showToast('✅ Booking request sent to WhatsApp!', 'success');
+
+            // ─── FIXED: Redirect to home page after 1 second ───
+            setTimeout(function() {
+                window.location.href = "../index.html";
+            }, 1000);
+
+            // Reset button state (redirect will happen before user interacts again)
+            sendBtn.disabled = false;
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane btn-icon"></i> Send Booking Request';
+            isProcessing = false;
+        }
+
+        function handleCheckAvailability() {
+            const valid = validateForm();
+            if (!valid) {
+                showToast('Please fill in all required fields to check availability.', 'error');
+                return;
+            }
+            showToast('✅ Availability check passed! Send your booking request to confirm.', 'success');
+        }
+
+        sendBtn.addEventListener('click', handleSubmit);
+        if (checkAvailBtn) {
+            checkAvailBtn.addEventListener('click', handleCheckAvailability);
+        }
+
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(inp => {
+            inp.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    handleSubmit();
+                }
+            });
+        });
+
+        console.log('✅ WhatsApp Booking ready!');
+        console.log('📱 WhatsApp number set to: +' + WHATSAPP_NUMBER);
+    })();
+
+
+
+
+
+
+
+
+
+
+    // glocy hover efect ponter
+
+
+const dot = document.querySelector(".cursor-dot");
+const glow = document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove", (e) => {
+    dot.style.left = `${e.clientX}px`;
+    dot.style.top = `${e.clientY}px`;
+
+    glow.style.left = `${e.clientX}px`;
+    glow.style.top = `${e.clientY}px`;
+});
+
+const hoverElements = document.querySelectorAll(
+    "button, a, .menu-item, input[type='button'], input[type='submit'], input, label, .event-option, textarea, .left-brand"
+);
+
+hoverElements.forEach((element) => {
+    element.addEventListener("mouseenter", () => {
+        glow.classList.add("active");
+    });
+
+    element.addEventListener("mouseleave", () => {
+        glow.classList.remove("active");
+    });
+});
+
+
+
+function goHome() {
+    window.location.href =
+    "../index.html";
+}
+</script>
+
+</body>
+</html>

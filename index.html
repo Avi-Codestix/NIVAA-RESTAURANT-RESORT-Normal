@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIVA — Luxury Restaurant & Resort</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+     <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+        <h1 class="loader-text">NIVAA</h1>
+    </div>
+</div>
+<body>
+    <!-- ponter hovver effect -->
+    <div class="cursor-dot"></div>
+   <div class="cursor-glow"></div>
+
+    <!-- ============================================
+    HEADER
+    ============================================ -->
+  <header class="header" id="header">
+        <div class="container">
+<a href="index.html" class="logo">
+    <span class="nav-logo-name">NIVAA</span>
+    <span class="nav-logo-tagline">
+        NIVAA RESTAURANT &amp; RESORTS
+    </span>
+</a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="pages/about.html">About</a>
+                <a href="pages/menu.html">Menu</a>
+                <a href="pages/rooms.html">Rooms</a>
+                <a href="pages/Event.html">Events</a>
+                <a href="Whatsappformsubmit/booking.html">Contact</a>
+                 <a href="../Whatsappformsubmit/booking.html" style="color: black !important;" class="btn-nav">BOOK NOW</a>
+            </nav>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================
+    HERO
+    ============================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787108940/HomeHero.webp" fetchpriority="high" alt="Hero Background Image" class="placeholder" onerror="this.outerHTML='<div class=\'placeholder\' style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#141414;color:rgba(255,255,255,0.08);font-size:14px;letter-spacing:2px;text-transform:uppercase;font-family:Inter,sans-serif;\'>Hero Background Image</div>'">
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">✦ Welcome to NIVAA —</div>
+                <h1>EXPERIENCE<br><span class="gold">THE ART OF <br> DINING</span></h1>
+                
+                <div class="botm">
+                    <!-- <p>Where Fine Dining, Luxury Stay &amp; Celebrations Meet</p> -->
+
+                    <div class="hero-buttons">
+                        <a href="pages/menu.html" class="btn-gold">
+                            <i class="fa-solid fa-utensils"></i> Explore Menu
+                        </a>
+                    </div>
+
+
+                    <div class="hero-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                        <span class="reviews">1200+ Google Reviews</span>
+                        <span class="divider"></span>
+                        <span class="reviews">✦ Award Winning</span>
+                        <span class="divider"></span>
+                        <span class="reviews">✦ Since 2026</span>
+                    </div>
+
+                    <div class="hero-tags">
+                        <span><i class="fas fa-circle"></i> Fine Dining</span>
+                        <span><i class="fas fa-circle"></i> Luxury Stay</span>
+                        <span><i class="fas fa-circle"></i> Events & Celebrations</span>
+                        <span><i class="fas fa-circle"></i> Hospitality</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Info -->
+            <div class="hero-float">
+                <div class="item">
+                    <span class="num">4.9</span>
+                    <span>Rating</span>
+                </div>
+                <div class="line"></div>
+                <div class="item">
+                    <span class="num">100+</span>
+                    <span>Dishes</span>
+                </div>
+                <div class="line"></div>
+                <div class="item">
+                    <span class="num">2026</span>
+                    <span>Since</span>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section>
+        <!-- Feature Cards -->
+
+        <div class="features-grid">
+            <a href="pages/menu.html" class="feature-card">
+                <div class="placeholder-sm">
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787065035/MenuHero.webp"  loading="lazy"
+  decoding="async" alt="Restaurant Image" onerror="this.outerHTML='<span style=\'font-size:10px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Restaurant Image</span>'">
+                </div>
+                <div class="icon-wrap"><i class="fas fa-utensils"></i></div>
+                <h4>Restaurant</h4>
+                <p>Multi-course fine dining</p>
+            </a>
+            <a href="pages/rooms.html" class="feature-card">
+                <div class="placeholder-sm">
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787073257/Roomshero.webp"  loading="lazy"
+  decoding="async" alt="Luxury Rooms Image" onerror="this.outerHTML='<span style=\'font-size:10px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Luxury Rooms Image</span>'">
+                </div>
+                <div class="icon-wrap"><i class="fas fa-bed"></i></div>
+                <h4>Luxury Rooms</h4>
+                <p>Comfort meets elegance</p>
+            </a>
+            <a href="pages/swimmingPool.html" class="feature-card">
+                <div class="placeholder-sm">
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787224817/pool_jwjl4p.webp"  loading="lazy"
+  decoding="async" alt="Swimming Pool Image" onerror="this.outerHTML='<span style=\'font-size:10px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Swimming Pool Image</span>'">
+                </div>
+                <div class="icon-wrap"><i class="fas fa-swimmer"></i></div>
+                <h4>Swimming Pool</h4>
+                <p>Retreat &amp; unwind</p>
+            </a>
+            <a href="EventCelebration/Hall-of-Honor.html" class="feature-card">
+                <div class="placeholder-sm">
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787139348/partyHall.webp" loading="lazy"
+  decoding="async" alt="Party Hall Image" onerror="this.outerHTML='<span style=\'font-size:10px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Party Hall Image</span>'">
+                </div>
+                <div class="icon-wrap"><i class="fas fa-glass-cheers"></i></div>
+                <h4>Party Hall</h4>
+                <p>Celebrate in style</p>
+            </a>
+            <a href="pages/openLawn.html" class="feature-card">
+                <div class="placeholder-sm">
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787224818/open_lawn.webp"  loading="lazy"
+  decoding="async" alt="Open Lawn Image" onerror="this.outerHTML='<span style=\'font-size:10px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Open Lawn Image</span>'">
+                </div>
+                <div class="icon-wrap"><i class="fas fa-tree"></i></div>
+                <h4>Open Lawn</h4>
+                <p>Perfect for gatherings</p>
+            </a>
+  <a href="pages/PrivateDining.html" class="feature-card">
+    <div class="placeholder-sm">
+        <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787224816/private-dining_zxbyem.webp"
+             loading="lazy"
+             decoding="async"
+             alt="Private Dining Image"
+             onerror="this.outerHTML='<span style=\'font-size:10px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Private Dining Image</span>'">
+    </div>
+
+    <div class="icon-wrap">
+        <i class="fas fa-crown"></i>
+    </div>
+
+    <h4>Private Dining</h4>
+    <p>Exclusivity redefined</p>
+</a>
+    </section>
+
+    <!-- ============================================
+    ABOUT US
+    ============================================ -->
+
+    <section class="chef-section"  style="background-color: #ede4d4" id="chef">
+        <div class="container">
+            <div class="about-heading-wrap">
+    <div class="section-label">About Us —</div>
+
+    <h2 class="section-title">
+        About <span>Our Restaurant & Resort</span>
+    </h2>
+
+    <div class="divider-AboutusHome"></div>
+</div>
+            <div class="chef-grid">
+                <!-- Left Image -->
+                <div class="chef-image">
+
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787108211/HomeAbout.webp"  loading="lazy"
+  decoding="async" alt="Chef Image" onerror="this.outerHTML='<span>Chef Image</span>'">
+
+                </div>
+
+                <!-- Right Content -->
+                <div class="chef-content">
+                    <div class="section-label">Our Culinary Art</div>
+
+                    <h2 class="section-title">
+                        A New <span>Culinary Chapter</span>
+                    </h2>
+
+                    <p>
+                        At Nivaa, every dish is a masterpiece, crafted with passion, precision, and the finest ingredients. We blend tradition with innovation to create unforgettable culinary experiences.
+                    </p>
+
+
+                    <div class="chef-stats">
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p>Years of Experience</p>
+                        </div>
+
+                        <div class="stat">
+                            <h3>200+</h3>
+                            <p>Signature Dishes</p>
+                        </div>
+
+                        <div class="stat">
+                            <h3>50K+</h3>
+                            <p>Happy Customers</p>
+                        </div>
+                    </div>
+
+                    <button class="btn-gold">
+                        <i class="fas fa-chevron-right"></i>
+                        Discover More
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+    SIGNATURE DISHES
+    ============================================ -->
+
+    <section class="dishes-section" id="dishes">
+
+        <div class="container">
+
+            <div class="dishes-header">
+                <div>
+                    <div class="section-label">Our Signature —</div>
+                    <h2 class="section-title">
+                        Signature <span>Dishes</span>
+                    </h2>
+                    <div class="divider"></div>
+                </div>
+
+       <!-- <button class="btn-gold view-all-btn" data-category="Signature Dishes">
+                <i class="fas fa-chevron-right"></i>
+                View All
+            </button> -->
+            </div>
+
+
+
+         
+
+
+
+            <div class="dishes-grid">
+
+                <!-- Card 1 -->
+                <div class="dish-card">
+
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787997136/palak_patta_chaat.png"  loading="lazy"
+  decoding="async" alt="Kaju Paneer Seekh Kebab" onerror="this.src='https://placehold.co/600x800/222/ffffff?text=Food+1'">
+
+                    <div class="dish-overlay">
+
+                        <h4>Palak Patta Chaat</h4>
+
+                        <div class="meta">
+                            <span class="price">₹270</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 2 -->
+                <div class="dish-card">
+
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787997133/kamal_kakdi_chaat.png"  loading="lazy"
+  decoding="async" alt="Multani Paneer Tikka" onerror="this.src='https://placehold.co/600x800/222/ffffff?text=Food+2'">
+
+                    <div class="dish-overlay">
+
+                        <h4>Kamal Kakdi Chaat</h4>
+
+                        <div class="meta">
+                            <span class="price">₹290</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 3 -->
+                <div class="dish-card">
+
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787997133/honey_chilli_lotus_stem.png"  loading="lazy"
+  decoding="async" alt="Haandi Dum Biryani" onerror="this.src='https://placehold.co/600x800/222/ffffff?text=Food+3'">
+
+                    <div class="dish-overlay">
+
+                        <h4>Honey Chilli Lotus Stem</h4>
+
+                        <div class="meta">
+                            <span class="price">₹320</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 4 -->
+                <div class="dish-card">
+
+                    <img src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1794143521/Dahi_Ke_Sholay.webp"  loading="lazy"
+  decoding="async" alt="Dahi Ke Sholay" onerror="this.src='https://placehold.co/600x800/222/ffffff?text=Food+4'">
+
+                    <div class="dish-overlay">
+
+                        <h4>Dahi Ke Sholay</h4>
+
+                        <div class="meta">
+                            <span class="price">₹360</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div> 
+
+    </section>
+
+    
+
+<!-- --------------------------------------------------------------------------------------------------------->
+
+<section class="about-section" style="background-color: #ede4d4" id="about">
+    <div class="container">
+
+        <div class="about-grid">
+
+            <!-- =========================
+                 LEFT CONTENT
+            ========================== -->
+
+            <div class="about-content">
+
+                <div class="section-label">
+                    THE NIVAA EXPERIENCE
+                    <span></span>
+                </div>
+
+
+                <h2 class="section-title">
+                    Good Food.<br>
+                    Beautiful <span>Moments.</span>
+                </h2>
+                <div class="divider"></div>
+
+                <p>
+                    At Nivaa Restaurant &amp; Resorts, every visit is designed
+                    to be more than just a meal. From delicious food to a warm
+                    atmosphere, we bring together everything you need for a
+                    memorable time with family and friends.
+                </p>
+
+
+                <!-- FEATURES -->
+
+                <div class="about-timeline">
+
+                    <!-- FEATURE 1 -->
+
+                    <div class="about-feature">
+
+                        <div class="feature-icon">
+                            <i data-lucide="concierge-bell"></i>
+                        </div>
+
+                        <h4>DELICIOUS CUISINE</h4>
+
+                        <small>
+                            Carefully crafted dishes made with the finest
+                            ingredients.
+                        </small>
+
+                    </div>
+
+
+                    <!-- FEATURE 2 -->
+
+                    <div class="about-feature">
+
+                        <div class="feature-icon">
+                            <i data-lucide="sparkles"></i>
+                        </div>
+
+                        <h4>WARM AMBIENCE</h4>
+
+                        <small>
+                            A cozy and elegant setting that makes you feel
+                            right at home.
+                        </small>
+
+                    </div>
+
+
+                    <!-- FEATURE 3 -->
+
+                    <div class="about-feature">
+
+                        <div class="feature-icon">
+                            <i data-lucide="heart"></i>
+                        </div>
+
+                        <h4>MEMORABLE MOMENTS</h4>
+
+                        <small>
+                            From casual meals to grand celebrations, we make
+                            every moment special.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button class="btn-gold" style="color: black;">
+                    <i class="fas fa-chevron-right"></i>
+                    Explore NIVAA
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT - 3 IMAGE COLLAGE
+            ========================== -->
+
+            <div class="about-image">
+
+                <!-- IMAGE 1 - BIG -->
+
+                <div class="about-img-main">
+                    <img
+                        src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787108940/nivaaExperience.webp"
+                        alt="Nivaa Restaurant"
+                        loading="lazy"
+                    >
+                </div>
+
+
+                <!-- IMAGE 2 - SMALL -->
+
+                <div class="about-img-small">
+                    <img
+                        src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787108936/NivaaExper3.webp"
+                        alt="Nivaa Food"
+                        loading="lazy"
+                    >
+                </div>
+
+
+                <!-- IMAGE 3 - SMALL -->
+
+                <div class="about-img-small">
+                    <img
+                        src="https://res.cloudinary.com/uzhcoc7h/image/upload/v1787108940/HomeHero.webp"
+                        alt="Nivaa Dining"
+                        loading="lazy"
+                    >
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+             
+     
+
+
+<!-- ------------------------------------- -->
+
+
+
+
+
+    <!-- ============================================
+    ROOMS
+    ============================================ -->
+    <section class="rooms-section" id="rooms">
+        <div class="container">
+            <div class="rooms-header">
+                <div>
+                    <div class="section-label">Stay With Us</div>
+                    <h2 class="section-title">Our Rooms <span>&amp; Suites</span></h2>
+                    <div class="divider"></div>
+                </div>
+                <!-- <a href="pages/rooms.html" class="btn-gold" style="padding:10px 28px;font-size:13px;">
+    <i class="fas fa-chevron-right"></i> View All
+</a> -->
+            </div>
+
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <div class="placeholder">
+                        <img src="https://res.cloudinary.com/detfekp7c/image/upload/v1784015115/room-1_sa6dkr.png"  loading="lazy"
+  decoding="async" alt="Room Image 01" onerror="this.outerHTML='<span style=\'font-size:13px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Room Image 01</span>'">
+                    </div>
+                    <div class="body">
+                        <h4>Deluxe Room</h4>
+                        <div class="price">₹3,999 <small>/ Night</small></div>
+                        <div class="amenities">
+                            <span><i class="fas fa-user"></i> 2 Guest</span>
+                            <span><i class="fas fa-bed"></i> 1 King Bed</span>
+                            <span><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="placeholder">
+                        <img src="https://res.cloudinary.com/detfekp7c/image/upload/v1784015139/room-2_ymp73o.png"  loading="lazy"
+  decoding="async" alt="Room Image 02" onerror="this.outerHTML='<span style=\'font-size:13px;color:rgba(255,255,255,0.08);letter-spacing:1px;text-transform:uppercase;\'>Room Image 02</span>'">
+                    </div>
+                    <div class="body">
+                        <h4>Premium Suite</h4>
+                        <div class="price">₹5,999 <small>/ Night</small></div>
+                        <div class="amenities">
+                            <span><i class="fas fa-user"></i> 2 Guest</span>
+                            <span><i class="fas fa-bed"></i> 1 King Bed</span>
+                            <span><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+<!-- ============================================
+    FOOTER
+    ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <!-- <a href="index.html" class="logo">
+    <img src="logoIcon.png" alt="NIVAA Logo" class="placeholder-img" onerror="this.style.display='none'">
+</a> -->
+
+<a href="../index.html" class="footer-logo">
+    <span class="footer-logo-name">NIVAA</span>
+    <span class="footer-logo-tagline">
+        NIVAA RESTAURANT &amp; RESORTS
+    </span>
+</a>
+                    <p>Where fine dining, luxury stays, and celebrations come together to create unforgettable moments.</p>
+<div class="socials">
+    <a href="https://www.facebook.com/share/1JspR7B6Dt/" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+
+    <a href="https://www.instagram.com/nivaa_resorts?igsh=aXVwbm1wanBmMDR3" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="#" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-youtube"></i>
+    </a>
+</div>
+                </div>
+
+                <div>
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./pages/about.html">About</a></li>
+                        <li><a href="./pages/menu.html">Menu</a></li>
+                        <li><a href="./pages/rooms.html">Rooms</a></li>
+                        <li><a href="./pages/Event.html">Events</a></li>
+                        <li><a href="./career/career.html">Careers</a></li>
+                        <li><a href="../Whatsappformsubmit/booking.html">Contact</a></li>
+                    </ul>
+                </div> 
+
+                <div>
+                    <h5>Services</h5> 
+                    <ul>
+                        <li><a href="./pages/menu.html">Fine Dining</a></li>
+                        <li><a href="./pages/rooms.html">Luxury Rooms</a></li>
+                        <li><a href="./pages/swimmingPool.html">Swimming Pool</a></li>
+                        <li><a href="./EventCelebration/Hall-of-Honor.html">Party Hall</a></li>
+                        <li><a href="./pages/openLawn.html">Open Lawn</a></li>
+                        <li><a href="./pages/PrivateDining.html">Private Dining</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Babugarh, vikasnagar, Uttrakhand</li>
+                        <li><i class="fas fa-phone"></i> +91 70371 27008</li>
+                        <li><i class="fas fa-envelope"></i> nivaa2026@gmail.com</li>
+                    </ul>
+
+
+                    <div class="footer-map" style="margin-top:16px;">
+                        <a
+                        href="https://maps.app.goo.gl/w8epWp3AyZvk5UVT9"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open NIVAA Restaurant & Resorts in Google Maps"
+                        style="display:block; width:100%;">
+                        <!-- NIVAA GOOGLE MAP -->
+                         <iframe
+                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d214.96907150416087!2d77.74886808754255!3d30.45012722770551!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390f2f002e0fdb53%3A0x12cd8e582002053d!2sNIVAA%20RESTAURANT%20%26%20RESORTS!5e0!3m2!1sen!2sin!4v1786986239545!5m2!1sen!2sin"
+                         width="100%"
+                         height="300"
+                         style="border:0; border-radius:12px; pointer-events:none;"
+                         allowfullscreen=""
+                         loading="lazy"
+                         referrerpolicy="strict-origin-when-cross-origin">
+                        </iframe>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 NIVAA. All rights reserved.</p>
+            <div class="links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- ========================================================== -->
+
+
+     <!-- POPUP -->
+
+
+    <!-- ============================================
+    SIGNATURE DISH DETAIL POPUP
+    ============================================ -->
+    <div class="signature-modal" id="signatureModal" aria-hidden="true">
+        <div class="signature-modal-box" role="dialog" aria-modal="true" aria-labelledby="signatureModalTitle">
+
+            <button class="signature-modal-close" id="signatureModalClose" type="button" aria-label="Close dish details">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="signature-modal-image-wrap">
+                <img id="signatureModalImage" src="" alt="" class="signature-modal-image">
+            </div>
+
+            <div class="signature-modal-content">
+
+                <div class="signature-modal-label">SIGNATURE DISH</div>
+
+                <h2 id="signatureModalTitle"></h2>
+
+                <div class="signature-modal-divider"> 
+                    <span></span>
+                    <i class="fas fa-utensils"></i>
+                    <span></span>
+                </div>
+
+                <p class="signature-modal-description" id="signatureModalDescription"></p>
+
+                <div class="signature-modal-perfect">
+                    <div class="signature-modal-perfect-title">
+                        <i class="far fa-lemon"></i>
+                        <strong>Perfect with</strong>
+                    </div>
+                    <p id="signatureModalPerfect"></p>
+                </div>
+
+                <div class="signature-modal-bottom">
+                    <div class="signature-modal-price-wrap">
+                        <div class="signature-modal-price" id="signatureModalPrice"></div>
+                        <small>(Taxes extra)</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- =========================================================== -->
+
+
+
+
+
+    <!-- POPUP -->
+
+     <!-- MENU POPUP -->
+<div class="menu-modal" id="menuModal">
+
+    <div class="menu-modal-box">
+
+        <button class="menu-modal-close" id="menuModalClose">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="menu-modal-header">
+    <div class="section-label">MENU</div>
+
+    <h2 id="modalTitle">Menu</h2>
+
+    <div class="divider"></div>
+
+    <!-- SEARCH BAR -->
+    <div class="menu-search">
+        <i class="fas fa-search"></i>
+
+        <input
+            type="text"
+            id="menuSearchInput"
+            placeholder="Search dishes..."
+            autocomplete="off"
+        />
+
+        <button id="clearMenuSearch" type="button" aria-label="Clear search">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
+
+<div class="menu-modal-grid" id="modalMenuContainer"></div>
+
+    </div>
+
+</div>
+
+
+    
+
+
+     
+
+ 
+
+
+    
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    lucide.createIcons();
+</script>
+    <script src="js/menu.js"></script>
+<script src="js/script.js"></script>
+</script>
+
+</body>
+</html>
+  <!-- ====== -->
